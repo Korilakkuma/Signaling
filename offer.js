@@ -34,7 +34,9 @@ navigator.mediaDevices.getUserMedia({ audio: true, video: true })
     };
 
     const candidate = (message) => {
-      peerConnection.addIceCandidate(message.candidate);
+      if (message.ice) {
+        peerConnection.addIceCandidate(message.ice);
+      }
     }
 
     signalingChannel.message(() => {}, answer, candidate);
