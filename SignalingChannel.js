@@ -9,7 +9,9 @@ class SignalingChannel {
   }
 
   send(sessionDescription) {
-    this.websocket.send(JSON.stringify(sessionDescription));
+    if (this.websocket.readyState === WebSocket.OPEN) {
+      this.websocket.send(JSON.stringify(sessionDescription));
+    }
   }
 
   message(offer, answer, candidate) {
